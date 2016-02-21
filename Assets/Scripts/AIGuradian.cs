@@ -25,14 +25,15 @@ public class AIGuradian : MonoBehaviour {
 	}
     float getDistance(GameObject obj)
     {
-        float x, y, z, distance; // for finding distance
-        x = Mathf.Pow(obj.transform.position.x - transform.position.x, 2.0f);
-        y = Mathf.Pow(obj.transform.position.y - transform.position.y, 2.0f);
-        z = Mathf.Pow(obj.transform.position.z - transform.position.z, 2.0f);
-        // get the distance 
-        distance = Mathf.Sqrt(x + y + z);
-        return distance;
+        return Vector3.Distance(obj.transform.position, transform.position);
     }
+
+    float getDistSqr(GameObject obj)
+    {
+        Vector3 delta = obj.transform.position - transform.position;
+        return Vector3.Dot(delta, delta);
+    }
+
     void AITraversal()
     {
         if (getDistance(enemy) >= 60.0f) // if it is too far find a portal
